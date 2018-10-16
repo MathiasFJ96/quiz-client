@@ -13,7 +13,7 @@ public class QuizGameClient {
 	boolean connect = true;
 	try {
 		
-		Socket connectToServer = new Socket("localhost", 8000);
+		Socket connectToServer = new Socket("192.168.43.119", 8000);
 		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
 		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
 		
