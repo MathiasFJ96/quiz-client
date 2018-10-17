@@ -18,7 +18,7 @@ public class QuizGameClient {
 	
 	try {
 		
-		Socket connectToServer = new Socket("192.168.43.119", 8000);
+		Socket connectToServer = new Socket("192.168.43.119", 8300);
 		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
 		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
 		ObjectInputStream objectFromServer = new ObjectInputStream(connectToServer.getInputStream());
@@ -28,7 +28,14 @@ public class QuizGameClient {
 		}
 		
 		while (connect) {
-			System.out.print("");
+			toServer.flush();
+			if(answer.equals("n")) {
+				connect=false;
+				connectToServer.close();
+				input.close();
+			}
+				
+			// System.out.print("");
 			
 			Question question = (Question) objectFromServer.readObject();
 			question.PrintQuestion();
