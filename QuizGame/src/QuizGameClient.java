@@ -40,8 +40,6 @@ public class QuizGameClient {
 			Question question = (Question) objectFromServer.readObject();
 			question.PrintQuestion();
 			
-			
-			
 		}
 	}
 	catch (IOException ex) {
