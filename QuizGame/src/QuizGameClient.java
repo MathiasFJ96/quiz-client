@@ -40,6 +40,11 @@ public class QuizGameClient {
 			Question question = (Question) objectFromServer.readObject();
 			question.PrintQuestion();
 			
+			String qAnswer = input.next();
+			if(qAnswer.equals(question.getAns())) {
+				// +score for that
+			}
+			
 			
 			
 		}
