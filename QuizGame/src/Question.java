@@ -28,4 +28,8 @@ public class Question implements java.io.Serializable {
 	public void CorrectAnswer() {
 		System.out.println("The correct answer is: " +Ans);
 	}
+	
+	public String getAns() {
+		return Ans;
+	}
 }
