@@ -49,7 +49,7 @@ public class QuizGameClient {
 			
 			
 			String qAnswer = input.next();
-			if(QuestionDB.Question1.checkAns(qAnswer)) {
+			if(QuestionDB.questions[questionNumber].checkAns(qAnswer)) {
 				score++;
 				toServer.writeInt(score);
 				System.out.println("Correct, you now have " + score + " points");
