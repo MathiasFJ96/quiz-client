@@ -32,6 +32,6 @@ public class Question implements java.io.Serializable {
 	}
 	
 	public boolean checkAns(String ans) {
-		return ans.equals(this.ansChar);
+		return ans.toLowerCase().equals(this.ansChar.toLowerCase());
 	}
 }
