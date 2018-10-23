@@ -20,14 +20,14 @@ public class QuizGameClient {
 	
 	try {
 		
-		Socket connectToServer = new Socket("192.168.43.181", 8100);
+		Socket connectToServer = new Socket("192.168.43.181", 8200);
 		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
 		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
 		//ObjectInputStream objectFromServer = new ObjectInputStream(connectToServer.getInputStream());
 		
 		if(answer.equals("y")) {
 			toServer.writeInt(1);
-			System.out.println("Conneting to server");
+			System.out.println("Connecting to server");
 		}
 		
 		while (connect) {
@@ -37,7 +37,9 @@ public class QuizGameClient {
 				connectToServer.close();
 				input.close();
 			}
-				
+			
+			System.out.println("You are player "+fromServer.readInt());
+			
 			// System.out.print("");
 			/*
 			Question question = (Question) objectFromServer.readObject();
