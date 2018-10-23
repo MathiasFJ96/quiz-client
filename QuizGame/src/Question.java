@@ -7,14 +7,16 @@ public class Question implements java.io.Serializable {
 	public String C;
 	public String D;
 	public String Ans;
+	public char ansChar;
 	
-	public Question(String QuizText, String A, String B, String C, String D, String Ans) {
+	public Question(String QuizText, String A, String B, String C, String D, String Ans, char ansChar) {
 		this.QuizText = QuizText;
 		this.A = A;
 		this.B = B;
 		this.C = C;
 		this.D = D;
 		this.Ans = Ans;
+		this.ansChar = ansChar; 
 	}
 	
 	public void PrintQuestion() {
@@ -26,10 +28,10 @@ public class Question implements java.io.Serializable {
 	}
 	
 	public void CorrectAnswer() {
-		System.out.println("The correct answer is: " +Ans);
+		System.out.println("Wrong, the correct answer is: " + ansChar + " "+Ans);
 	}
 	
-	public String getAns() {
-		return Ans;
+	public boolean checkAns(String ans) {
+		return ans.equals(this.ansChar);
 	}
 }

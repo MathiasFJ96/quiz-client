@@ -47,11 +47,14 @@ public class QuizGameClient {
 			QuestionDB.Question1.PrintQuestion();
 			
 			String qAnswer = input.next();
-			if(qAnswer.equals(QuestionDB.Question1.getAns())) {
+			if(QuestionDB.Question1.checkAns(qAnswer)) {
 				score++;
 				toServer.writeInt(score);
-				System.out.println("You have");
+				System.out.println("Correct, you now have " + score + " points");
 				// +score for that
+			}
+			else {
+				QuestionDB.Question1.CorrectAnswer();
 			}
 			
 		}
