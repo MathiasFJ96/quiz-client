@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class QuestionDB {
 
@@ -11,6 +12,9 @@ public class QuestionDB {
 		static Question Question8 = new Question("How many km/h are you typically allowed to drive within the city limits?","50","60","30","40","50", "A");
 		static Question Question9 = new Question("Which of these sports do NOT use a racket?","Polo","Badminton","Squash","Tennis","Polo", "A");
 		static Question Question10 = new Question("Does the moon rotate?","No","Yes, but only during the day","Yes","Yes, but only during summer","No", "A");
+		
+		public static Question[] questions = {Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10};
+		
 
 }
 

@@ -41,10 +41,11 @@ public class QuizGameClient {
 			
 			// System.out.print("");
 			
-			
+			for (int i = 0; i < QuestionDB.questions.length; i++) {
 			questionNumber = fromServer.readInt();
 			System.out.println(questionNumber);
-			QuestionDB.Question1.PrintQuestion();
+			QuestionDB.questions[questionNumber].PrintQuestion();
+			
 			
 			String qAnswer = input.next();
 			if(QuestionDB.Question1.checkAns(qAnswer)) {
@@ -55,6 +56,7 @@ public class QuizGameClient {
 			}
 			else {
 				QuestionDB.Question1.CorrectAnswer();
+			}
 			}
 			
 		}
