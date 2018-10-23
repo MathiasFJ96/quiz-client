@@ -8,6 +8,7 @@ public class QuizGameClient {
 
 	static int score = 0;
 	private static int questionNumber;
+	private static int leadingPlayer;
 	
 	public static void main(String [] args) {
 		 Scanner input = new Scanner(System.in);
@@ -57,7 +58,15 @@ public class QuizGameClient {
 			else {
 				QuestionDB.Question1.CorrectAnswer();
 			}
-			System.out.println("Leading player has " + fromServer.readInt() + "points");
+			leadingPlayer = fromServer.readInt();
+			if (leadingPlayer < 3 ) {
+			System.out.println(leadingPlayer + "is in the lead with " + fromServer.readInt() + " points");
+			}else {
+			System.out.println("multiple players are leading with " + fromServer.readInt() + " points");
+			}
+			
+			
+			
 			}
 			
 		}
