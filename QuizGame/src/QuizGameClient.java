@@ -20,7 +20,7 @@ public class QuizGameClient {
 	
 	try {
 		
-		Socket connectToServer = new Socket("192.168.43.181", 8100);
+		Socket connectToServer = new Socket("192.168.43.181", 8200);
 		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
 		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
 		//ObjectInputStream objectFromServer = new ObjectInputStream(connectToServer.getInputStream());
