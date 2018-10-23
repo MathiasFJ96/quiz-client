@@ -27,7 +27,7 @@ public class QuizGameClient {
 		
 		if(answer.equals("y")) {
 			toServer.writeInt(1);
-			System.out.println("Conneting to server");
+			System.out.println("Connecting to server");
 		}
 		
 		while (connect) {
@@ -37,7 +37,9 @@ public class QuizGameClient {
 				connectToServer.close();
 				input.close();
 			}
-				
+			
+			System.out.println("You are player "+fromServer.readInt());
+			
 			// System.out.print("");
 			/*
 			Question question = (Question) objectFromServer.readObject();
