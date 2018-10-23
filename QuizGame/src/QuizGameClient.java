@@ -57,6 +57,7 @@ public class QuizGameClient {
 			else {
 				QuestionDB.Question1.CorrectAnswer();
 			}
+			System.out.println("Leading player has " + fromServer.readInt() + "points");
 			}
 			
 		}
