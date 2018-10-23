@@ -26,7 +26,7 @@ public class QuizGameClient {
 		ObjectInputStream fromServer = new ObjectInputStream(connectToServer.getInputStream());
 		
 		if(answer.equals("y")) {
-			toServer.writeInt(1);
+			toServer.writeObject(answer);
 			System.out.println("Connecting to server");
 		}
 		
