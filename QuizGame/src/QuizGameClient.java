@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class QuizGameClient {
 
+	static int score = 0; 
+	
 	public static void main(String [] args) {
 		 Scanner input = new Scanner(System.in);
 		 	System.out.println("Welcome to the quiz client");
@@ -42,6 +44,9 @@ public class QuizGameClient {
 			
 			String qAnswer = input.next();
 			if(qAnswer.equals(question.getAns())) {
+				score++;
+				toServer.writeInt(score);
+				System.out.println("You have");
 				// +score for that
 			}
 			
