@@ -31,7 +31,7 @@ public class QuizGameClient {
 		}
 		
 		while (connect) {
-			toServer.flush();
+			//toServer.flush();
 			if(answer.equals("n")) {
 				connect=false;
 				connectToServer.close();
