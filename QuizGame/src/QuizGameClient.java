@@ -1,14 +1,13 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class QuizGameClient {
 
-	static int score = 0; 
+	static int score = 0;
+	private static int questionNumber;
 	
 	public static void main(String [] args) {
 		 Scanner input = new Scanner(System.in);
@@ -21,9 +20,9 @@ public class QuizGameClient {
 	
 	try {
 		
-		Socket connectToServer = new Socket("192.168.43.181", 8200);
-		ObjectOutputStream toServer = new ObjectOutputStream(connectToServer.getOutputStream());
-		ObjectInputStream fromServer = new ObjectInputStream(connectToServer.getInputStream());
+		Socket connectToServer = new Socket("192.168.43.119", 8200);
+		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
+		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
 		
 		if(answer.equals("y")) {
 			toServer.writeInt(1);
@@ -42,11 +41,13 @@ public class QuizGameClient {
 			
 			// System.out.print("");
 			
-			Question question = (Question) fromServer.readObject();
-			question.PrintQuestion();
+			
+			questionNumber = fromServer.readInt();
+			System.out.println(questionNumber);
+			QuestionDB.Question1.PrintQuestion();
 			
 			String qAnswer = input.next();
-			if(qAnswer.equals(question.getAns())) {
+			if(qAnswer.equals(QuestionDB.Question1.getAns())) {
 				score++;
 				toServer.writeInt(score);
 				System.out.println("You have");
@@ -57,10 +58,7 @@ public class QuizGameClient {
 	}
 	catch (IOException ex) {
 		System.out.println(ex.toString() + 'n');
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	} 
 	}
 
 }
