@@ -21,9 +21,8 @@ public class QuizGameClient {
 	try {
 		
 		Socket connectToServer = new Socket("192.168.43.181", 8200);
-		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
 		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
-		//ObjectInputStream objectFromServer = new ObjectInputStream(connectToServer.getInputStream());
+		ObjectInputStream fromServer = new ObjectInputStream(connectToServer.getInputStream());
 		
 		if(answer.equals("y")) {
 			toServer.writeInt(1);
@@ -41,8 +40,8 @@ public class QuizGameClient {
 			System.out.println("You are player "+fromServer.readInt());
 			
 			// System.out.print("");
-			/*
-			Question question = (Question) objectFromServer.readObject();
+			
+			Question question = (Question) fromServer.readObject();
 			question.PrintQuestion();
 			
 			String qAnswer = input.next();
@@ -51,16 +50,16 @@ public class QuizGameClient {
 				toServer.writeInt(score);
 				System.out.println("You have");
 				// +score for that
-			}*/
+			}
 			
 		}
 	}
 	catch (IOException ex) {
 		System.out.println(ex.toString() + 'n');
-	} /*catch (ClassNotFoundException e) {
+	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}*/
+	}
 	}
 
 }
