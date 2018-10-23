@@ -7,9 +7,9 @@ public class Question implements java.io.Serializable {
 	public String C;
 	public String D;
 	public String Ans;
-	public char ansChar;
+	public String ansChar;
 	
-	public Question(String QuizText, String A, String B, String C, String D, String Ans, char ansChar) {
+	public Question(String QuizText, String A, String B, String C, String D, String Ans, String ansChar) {
 		this.QuizText = QuizText;
 		this.A = A;
 		this.B = B;
@@ -28,7 +28,7 @@ public class Question implements java.io.Serializable {
 	}
 	
 	public void CorrectAnswer() {
-		System.out.println("Wrong, the correct answer is: " + ansChar + " "+Ans);
+		System.out.println("Wrong, the correct answer is: " + ansChar + ": "+Ans);
 	}
 	
 	public boolean checkAns(String ans) {
