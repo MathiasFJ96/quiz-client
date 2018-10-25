@@ -10,23 +10,31 @@ public class QuizGameClient {
 	private static int questionNumber;
 	private static int leadingPlayer;
 	
+	private static Socket connectToServer;
+	private static DataOutputStream toServer;
+	private static DataInputStream fromServer;
+	
+	private static Scanner input;
+	private static boolean connect;
+	private static String answer;
+	
 	public static void main(String [] args) {
 		
 			// Initialize scanner
-		 Scanner input = new Scanner(System.in);
+	input = new Scanner(System.in);
 		 	System.out.println("Welcome to the quiz client");
 		 
 		 	// Boolean for starting game
-	boolean connect = true;
+	connect = true;
 	
 	System.out.println("Do you want to continue ? y/n lowercase only");
-	String answer = input.next();
+	answer = input.next();
 	
 	try {
 			// Initialize socket and data streams
-		Socket connectToServer = new Socket("192.168.43.119", 8200);
-		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
-		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
+		connectToServer = new Socket("192.168.43.119", 8200);
+		toServer = new DataOutputStream(connectToServer.getOutputStream());
+		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
 			// Start game if player typed y
 		if(answer.equals("y")) {
