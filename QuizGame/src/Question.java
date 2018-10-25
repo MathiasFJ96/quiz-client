@@ -1,5 +1,5 @@
 
-public class Question implements java.io.Serializable {
+public class Question {
 	
 	public String QuizText;
 	public String A;

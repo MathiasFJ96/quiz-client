@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class QuizGameClient {
 		// Variables for player score and question numbers
-	static int score = 0;
+	private static int score = 0;
 	private static int questionNumber;
 	private static int leadingPlayer;
 	
