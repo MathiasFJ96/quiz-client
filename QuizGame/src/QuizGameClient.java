@@ -5,31 +5,36 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class QuizGameClient {
-
+		// Variables for player score and question numbers
 	static int score = 0;
 	private static int questionNumber;
 	private static int leadingPlayer;
 	
 	public static void main(String [] args) {
+		
+			// Initialize scanner
 		 Scanner input = new Scanner(System.in);
 		 	System.out.println("Welcome to the quiz client");
 		 
+		 	// Boolean for starting game
 	boolean connect = true;
 	
 	System.out.println("Do you want to continue ? y/n lowercase only");
 	String answer = input.next();
 	
 	try {
-		
+			// Initialize socket and data streams
 		Socket connectToServer = new Socket("192.168.43.119", 8200);
 		DataOutputStream toServer = new DataOutputStream(connectToServer.getOutputStream());
 		DataInputStream fromServer = new DataInputStream(connectToServer.getInputStream());
 		
+			// Start game if player typed y
 		if(answer.equals("y")) {
 			toServer.writeInt(1);
 			System.out.println("Connecting to server");
 		}
 		
+			// Close connection if player typed n
 		while (connect) {
 			//toServer.flush();
 			if(answer.equals("n")) {
@@ -70,10 +75,10 @@ public class QuizGameClient {
 			}
 			
 		}
-	}
+	} // Try end
 	catch (IOException ex) {
 		System.out.println(ex.toString() + 'n');
 	} 
-	}
+	} // Main thread
 
-}
+} // Class bracket
