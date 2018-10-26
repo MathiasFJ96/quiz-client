@@ -166,21 +166,53 @@ public class QuizGameClient {
 			ex.printStackTrace();
 		} 
 	}
+	
+	public static void playAgain(String answer) {
+		try {
+			System.out.println("Do you want to play again?");
+			
+			// Start game if player typed y
+			if(answer.equals("y")) {
+				toServer.writeInt(1);
+				System.out.println("Connected to Lobby");
+				gameIsRunning = true;
+				score = 0;
+			}
+			if(answer.equals("n")) {
+				connect=false;
+				connectToServer.close();
+				input.close();
+			}
+			if (answer.equals("y") || answer.equals("n")){
+				
+			} else {
+				System.out.println("please write y or n");
+				playAgain(input.next().toLowerCase());
+			}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+	}
 	public static void endGameStatus(int x,int score) {
 		if( x == 0 ) {
 			System.out.println("You Won with: " + score);
+			playAgain(input.next().toLowerCase());
 		} else if (x ==4) {
 			System.out.println("Drawed with: " + score);
+			playAgain(input.next().toLowerCase());
 		}else {
 			System.out.println("player " + x + " won with: " + score);
+			playAgain(input.next().toLowerCase());
 		}
+		
+		
 	}
 	public static void wantToPlay(String answer) {
 		try {
 		// Start game if player typed y
 		if(answer.equals("y")) {
 			toServer.writeInt(1);
-			System.out.println("Connecting to Lobby");
+			System.out.println("Connected to Lobby");
 			gameIsRunning = true;
 		}
 		if(answer.equals("n")) {
