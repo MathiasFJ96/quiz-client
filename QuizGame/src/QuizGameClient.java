@@ -18,8 +18,12 @@ public class QuizGameClient {
 	private static boolean connect;
 	private static boolean gameIsRunning;
 	private static String answer;
+	private static int playerNum;
+	
 	public static String verifyAnswer;
 	public static String qAnswer;
+	public static int player1Score, player2Score, player3Score;
+	
 	
 	public static void main(String [] args) {
 		
@@ -44,8 +48,8 @@ public class QuizGameClient {
 			// Close connection if player typed n
 		while (connect) {
 			//toServer.flush();
-			
-			System.out.println("You are player "+fromServer.readInt());
+			playerNum = fromServer.readInt();
+			System.out.println("You are player"+ playerNum);
 			
 			// System.out.print("");
 			
@@ -127,23 +131,34 @@ public class QuizGameClient {
 	
 	public static void winConditionMet(){
 		try {
-		int player1Score = fromServer.readInt();
-		int player2Score = fromServer.readInt();
-		if(player1Score >= 5 && player1Score == player2Score && player1Score == score) {
 			
-		} else if (player1Score >= 5 && player1Score == player2Score) {
+			if (playerNum == 1) {
+				player2Score = fromServer.readInt();
+				player3Score = fromServer.readInt();
+			} else if (playerNum == 2) {
+				player1Score = fromServer.readInt();
+				player3Score = fromServer.readInt();
+			} else if (playerNum == 3) {
+				player1Score = fromServer.readInt();
+			    player2Score = fromServer.readInt();
+			}
+			
+		
+			if(player1Score >= 5 && player1Score == player2Score && player1Score == score) {
+			
+			} else if (player1Score >= 5 && player1Score == player2Score) {
 			System.out.println("draw");
-		} else if (player1Score >= 5 && player1Score == score) {
+			} else if (player1Score >= 5 && player1Score == score) {
 			
-		} else if (player2Score >= 5 && player2Score == score) {
+			} else if (player2Score >= 5 && player2Score == score) {
 			
-		} else if(player1Score >= 5 ) {
+			} else if(player1Score >= 5 ) {
 			gameIsRunning = false;
 			endGameStatus(1, player1Score);
-		} else if (player2Score >=5 ){
+			} else if (player2Score >=5 ){
 			gameIsRunning = true;
 			endGameStatus(2, player2Score);
-		} else if (score >= 5) {
+			} else if (score >= 5) {
 			gameIsRunning = false;
 			endGameStatus(0,score);
 			
