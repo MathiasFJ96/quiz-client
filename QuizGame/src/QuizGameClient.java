@@ -56,7 +56,7 @@ public class QuizGameClient {
 			
 			while (gameIsRunning) {
 			questionNumber = fromServer.readInt();
-			System.out.println(questionNumber);
+			//System.out.println(questionNumber);
 			QuestionDB.questions[questionNumber].PrintQuestion();
 			
 			
@@ -175,6 +175,7 @@ public class QuizGameClient {
 			if(answer.equals("y")) {
 				toServer.writeInt(1);
 				System.out.println("Connected to Lobby");
+				System.out.print("Game starting over");
 				gameIsRunning = true;
 				score = 0;
 			}
