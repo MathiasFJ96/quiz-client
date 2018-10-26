@@ -53,17 +53,19 @@ public class QuizGameClient {
 			playerNum = fromServer.readInt();
 			System.out.println("You are player"+ playerNum);
 			
-			everoneWantToPlay = fromServer.readInt();
 			
-			if (everoneWantToPlay == 2) {
-				System.out.println("Someone Left");
-				connect = false;
-				
-			} 
 			
 			// System.out.print("");
 			
 			while (gameIsRunning) {
+				
+			everoneWantToPlay = fromServer.readInt();
+				
+			if (everoneWantToPlay == 2) {
+				System.out.println("Someone Left");
+				connect = false;
+					
+			} 
 			questionNumber = fromServer.readInt();
 			//System.out.println(questionNumber);
 			QuestionDB.questions[questionNumber].PrintQuestion();
