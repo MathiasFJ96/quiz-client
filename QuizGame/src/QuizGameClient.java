@@ -39,7 +39,7 @@ public class QuizGameClient {
 	
 	try {
 			// Initialize socket and data streams
-		connectToServer = new Socket("192.168.43.119", 8200);
+		connectToServer = new Socket("192.168.43.119", 8300);
 		toServer = new DataOutputStream(connectToServer.getOutputStream());
 		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
@@ -121,7 +121,7 @@ public class QuizGameClient {
 		try {
 		
 		if (leadingPlayer < 3 ) {
-		System.out.println(leadingPlayer + "is in the lead with " + fromServer.readInt() + " points");
+		System.out.println("Player" +leadingPlayer+ ": " + "is in the lead with " + fromServer.readInt() + " points");
 		}else {
 		System.out.println("multiple players are leading with " + fromServer.readInt() + " points");
 		}
@@ -192,7 +192,7 @@ public class QuizGameClient {
 		if (answer.equals("y") || answer.equals("n")){
 			
 		} else {
-			
+			System.out.print("please write y or n");
 			wantToPlay(input.next().toLowerCase());
 		}
 		} catch (IOException ex) {
