@@ -47,16 +47,18 @@ public class QuizGameClient {
 		
 		wantToPlay(answer);
 			// Close connection if player typed n
-		everoneWantToPlay = fromServer.readInt();
 		
-		if (everoneWantToPlay == 2) {
-			System.out.println("Someone Left");
-			connectToServer.close();
-		} 
 		while (connect) {
 			//toServer.flush();
 			playerNum = fromServer.readInt();
 			System.out.println("You are player"+ playerNum);
+			
+			everoneWantToPlay = fromServer.readInt();
+			
+			if (everoneWantToPlay == 2) {
+				System.out.println("Someone Left");
+				connectToServer.close();
+			} 
 			
 			// System.out.print("");
 			
