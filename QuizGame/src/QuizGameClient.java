@@ -16,6 +16,7 @@ public class QuizGameClient {
 	
 	private static Scanner input;
 	private static boolean connect;
+	private static boolean gameIsRunning;
 	private static String answer;
 	public static String verifyAnswer;
 	public static String qAnswer;
@@ -29,8 +30,8 @@ public class QuizGameClient {
 		 	// Boolean for starting game
 	connect = true;
 	
-	System.out.println("Do you want to continue ? y/n lowercase only");
-	answer = input.next();
+	System.out.println("Do you want to Join this session ? y/n");
+	answer = input.next().toLowerCase();
 	
 	try {
 			// Initialize socket and data streams
@@ -38,51 +39,36 @@ public class QuizGameClient {
 		toServer = new DataOutputStream(connectToServer.getOutputStream());
 		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
-			// Start game if player typed y
-		if(answer.equals("y")) {
-			toServer.writeInt(1);
-			System.out.println("Connecting to server");
-		}
 		
+		wantToPlay(answer);
 			// Close connection if player typed n
 		while (connect) {
 			//toServer.flush();
-			if(answer.equals("n")) {
-				connect=false;
-				connectToServer.close();
-				input.close();
-			}
 			
 			System.out.println("You are player "+fromServer.readInt());
 			
 			// System.out.print("");
 			
-			for (int i = 0; i < QuestionDB.questions.length; i++) {
+			while (gameIsRunning) {
 			questionNumber = fromServer.readInt();
 			System.out.println(questionNumber);
 			QuestionDB.questions[questionNumber].PrintQuestion();
 			
 			
 			qAnswer = input.next();
+			//recursive method about getting the correct input from client
 			verifyInput(qAnswer);
-				 			 
-			if(QuestionDB.questions[questionNumber].checkAns(verifyAnswer)) {
-				score++;
-				toServer.writeInt(score);
-				System.out.println("Correct, you now have " + score + " points");
-				// +score for that
-			}
-			else {
-				QuestionDB.Question1.CorrectAnswer();
-			}
+				 		
+			//correct answer + score addition
+			correctAnswer();
+			
 			leadingPlayer = fromServer.readInt();
-			if (leadingPlayer < 3 ) {
-			System.out.println(leadingPlayer + "is in the lead with " + fromServer.readInt() + " points");
-			}else {
-			System.out.println("multiple players are leading with " + fromServer.readInt() + " points");
-			}
+			//status of the quiz (who is leading etc.)
+			status();
 			
 			
+			//check win condition
+			winConditionMet();
 			
 			}
 			
@@ -107,6 +93,96 @@ public class QuizGameClient {
      	} else {
      		verifyInput(answer);
      	}
-		
 	}
+	
+	
+	public static void correctAnswer() {
+		try {
+		if(QuestionDB.questions[questionNumber].checkAns(verifyAnswer)) {
+			score++;
+			toServer.writeInt(score);
+			System.out.println("Correct, you now have " + score + " points");
+			// +score for that
+		}
+		else {
+			QuestionDB.questions[questionNumber].CorrectAnswer();
+		}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public static void status () {
+		try {
+		
+		if (leadingPlayer < 3 ) {
+		System.out.println(leadingPlayer + "is in the lead with " + fromServer.readInt() + " points");
+		}else {
+		System.out.println("multiple players are leading with " + fromServer.readInt() + " points");
+		}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} 
+	}
+	
+	public static void winConditionMet(){
+		try {
+		int player1Score = fromServer.readInt();
+		int player2Score = fromServer.readInt();
+		if(player1Score >= 5 && player1Score == player2Score && player1Score == score) {
+			
+		} else if (player1Score >= 5 && player1Score == player2Score) {
+			System.out.println("draw");
+		} else if (player1Score >= 5 && player1Score == score) {
+			
+		} else if (player2Score >= 5 && player2Score == score) {
+			
+		} else if(player1Score >= 5 ) {
+			gameIsRunning = false;
+			endGameStatus(1, player1Score);
+		} else if (player2Score >=5 ){
+			gameIsRunning = true;
+			endGameStatus(2, player2Score);
+		} else if (score >= 5) {
+			gameIsRunning = false;
+			endGameStatus(0,score);
+			
+		}
+		
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} 
+	}
+	public static void endGameStatus(int x,int score) {
+		if( x == 0 ) {
+			System.out.println("You Won with: " + score);
+		}else {
+			System.out.println("player: " + x + " won with: " + score);
+		}
+	}
+	public static void wantToPlay(String answer) {
+		try {
+		// Start game if player typed y
+		if(answer.equals("y")) {
+			toServer.writeInt(1);
+			System.out.println("Connecting to Lobby");
+			gameIsRunning = true;
+		}
+		if(answer.equals("n")) {
+			connect=false;
+			connectToServer.close();
+			input.close();
+		}
+		if (answer.equals("y") || answer.equals("n")){
+			
+		} else {
+			
+			wantToPlay(input.next().toLowerCase());
+		}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} 
+	}
+	
+	
 } // Class bracket
