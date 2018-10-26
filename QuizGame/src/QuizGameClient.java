@@ -40,7 +40,7 @@ public class QuizGameClient {
 	
 	try {
 			// Initialize socket and data streams
-		connectToServer = new Socket("192.168.43.119", 8300);
+		connectToServer = new Socket("192.168.43.119", 8400);
 		toServer = new DataOutputStream(connectToServer.getOutputStream());
 		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
@@ -146,13 +146,10 @@ public class QuizGameClient {
 		
 			if(player1Score >= 5 && player1Score == player2Score && player1Score == score) {
 			
-			} else if (player1Score >= 5 && player1Score == player2Score) {
+			} else if (score >= 5 && (player1Score == player2Score || score == player2Score || player1Score == player3Score || score == player3Score|| player2Score == player3Score || score == player3Score )) {
 			System.out.println("draw");
-			} else if (player1Score >= 5 && player1Score == score) {
-			
-			} else if (player2Score >= 5 && player2Score == score) {
-			
-			} else if(player1Score >= 5 ) {
+			endGameStatus(4, player1Score);
+			}else if(player1Score >= 5 ) {
 			gameIsRunning = false;
 			endGameStatus(1, player1Score);
 			} else if (player2Score >=5 ){
@@ -171,8 +168,10 @@ public class QuizGameClient {
 	public static void endGameStatus(int x,int score) {
 		if( x == 0 ) {
 			System.out.println("You Won with: " + score);
+		} else if (x ==4) {
+			System.out.println("All Players drawed with: " + score);
 		}else {
-			System.out.println("player: " + x + " won with: " + score);
+			System.out.println("player " + x + " won with: " + score);
 		}
 	}
 	public static void wantToPlay(String answer) {
@@ -191,7 +190,7 @@ public class QuizGameClient {
 		if (answer.equals("y") || answer.equals("n")){
 			
 		} else {
-			System.out.print("please write y or n");
+			System.out.println("please write y or n");
 			wantToPlay(input.next().toLowerCase());
 		}
 		} catch (IOException ex) {
