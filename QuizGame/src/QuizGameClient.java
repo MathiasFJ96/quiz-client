@@ -17,6 +17,8 @@ public class QuizGameClient {
 	private static Scanner input;
 	private static boolean connect;
 	private static String answer;
+	public static String verifyAnswer;
+	public static String qAnswer;
 	
 	public static void main(String [] args) {
 		
@@ -61,8 +63,10 @@ public class QuizGameClient {
 			QuestionDB.questions[questionNumber].PrintQuestion();
 			
 			
-			String qAnswer = input.next();
-			if(QuestionDB.questions[questionNumber].checkAns(qAnswer)) {
+			qAnswer = input.next();
+			verifyInput();
+				 			 
+			if(QuestionDB.questions[questionNumber].checkAns(verifyAnswer)) {
 				score++;
 				toServer.writeInt(score);
 				System.out.println("Correct, you now have " + score + " points");
@@ -86,7 +90,17 @@ public class QuizGameClient {
 	} // Try end
 	catch (IOException ex) {
 		System.out.println(ex.toString() + 'n');
-	} 
-	} // Main thread
+	}
 
+	} // Main thread
+	public static void verifyInput() {
+		if (qAnswer.equals("a") || qAnswer.equals("b") || qAnswer.equals("c") || qAnswer.equals("d")) {
+			verifyAnswer = qAnswer;
+			
+		} else {
+			qAnswer = null;
+			System.out.println("Please answer with a,b,c or d");
+			qAnswer = input.next();
+		}
+	}
 } // Class bracket
