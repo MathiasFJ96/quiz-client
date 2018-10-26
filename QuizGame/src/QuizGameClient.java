@@ -190,12 +190,13 @@ public class QuizGameClient {
 				System.out.println("Connected to Lobby");
 				System.out.println("Game starting over");
 				System.out.println("Waiting for all 3 players to answer");
+				
 				connect = true;
 				gameIsRunning = true;
 				score = 0;
 			}
 			if(answer.equals("n")) {
-				toServer.writeInt(0);
+				toServer.writeInt(2);
 				connect = true;
 				connectToServer.close();
 				input.close();
