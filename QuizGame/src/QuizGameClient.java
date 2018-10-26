@@ -23,7 +23,7 @@ public class QuizGameClient {
 	
 	public static String verifyAnswer;
 	public static String qAnswer;
-	public static int player1Score, player2Score, player3Score;
+	public static int player1Score, player2Score, player3Score, everoneWantToPlay;
 	
 	
 	public static void main(String [] args) {
@@ -40,13 +40,21 @@ public class QuizGameClient {
 	
 	try {
 			// Initialize socket and data streams
-		connectToServer = new Socket("192.168.43.119", 8500);
+		connectToServer = new Socket("192.168.43.119", 8600);
 		toServer = new DataOutputStream(connectToServer.getOutputStream());
 		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
 		
 		wantToPlay(answer);
 			// Close connection if player typed n
+		everoneWantToPlay = fromServer.readInt();
+		
+		if (everoneWantToPlay == 2) {
+			System.out.println("Some Left");
+			connectToServer.close();
+		} else {
+			System.out.println("Everone Wants To Play");
+		}
 		while (connect) {
 			//toServer.flush();
 			playerNum = fromServer.readInt();
@@ -222,9 +230,12 @@ public class QuizGameClient {
 			gameIsRunning = true;
 		}
 		if(answer.equals("n")) {
+		
 			toServer.writeInt(2);
-			connectToServer.close();
-			input.close();
+			connect = false;
+			System.out.println("Server closing");
+			
+			
 		}
 		if (answer.equals("y") || answer.equals("n")){
 			
