@@ -121,7 +121,7 @@ public class QuizGameClient {
 	
 	public static void status () {
 		
-		if (leadingPlayer < 3 ) {
+		if (leadingPlayer <=3 ) {
 		System.out.println("Player" +leadingPlayer+ ": " + "is in the lead with " + LeadingPlayersScore + " points");
 		}else {
 		System.out.println("multiple players are leading with " + LeadingPlayersScore + " points");
