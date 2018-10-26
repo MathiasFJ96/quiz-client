@@ -57,7 +57,8 @@ public class QuizGameClient {
 			
 			if (everoneWantToPlay == 2) {
 				System.out.println("Someone Left");
-				connectToServer.close();
+				connect = false;
+				
 			} 
 			
 			// System.out.print("");
@@ -232,7 +233,7 @@ public class QuizGameClient {
 		if(answer.equals("n")) {
 		
 			toServer.writeInt(2);
-			connect = false;
+			
 			System.out.println("Server closing");
 			
 			
