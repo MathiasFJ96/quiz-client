@@ -40,7 +40,7 @@ public class QuizGameClient {
 	
 	try {
 			// Initialize socket and data streams
-		connectToServer = new Socket("192.168.43.119", 8800);
+		connectToServer = new Socket("192.168.43.119", 8900);
 		toServer = new DataOutputStream(connectToServer.getOutputStream());
 		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
@@ -50,22 +50,24 @@ public class QuizGameClient {
 		
 		while (connect) {
 			//toServer.flush();
-			playerNum = fromServer.readInt();
+			if (playerNum == 0) {
+				playerNum = fromServer.readInt();
 			System.out.println("You are player"+ playerNum);
+			}
+			everoneWantToPlay = fromServer.readInt();
 			
+			if (everoneWantToPlay == 2) {
+				System.out.println("Someone Left");
+				connect = false;
+					
+			} 
 			
 			
 			// System.out.print("");
 			
 			while (gameIsRunning) {
 				
-			everoneWantToPlay = fromServer.readInt();
-				
-			if (everoneWantToPlay == 2) {
-				System.out.println("Someone Left");
-				connect = false;
-					
-			} 
+			
 			questionNumber = fromServer.readInt();
 			//System.out.println(questionNumber);
 			QuestionDB.questions[questionNumber].PrintQuestion();
@@ -189,11 +191,12 @@ public class QuizGameClient {
 				System.out.println("Game starting over");
 				System.out.println("Waiting for all 3 players to answer");
 				gameIsRunning = true;
+				connect = true;
 				score = 0;
 			}
 			if(answer.equals("n")) {
 				toServer.writeInt(0);
-				connect=false;
+				connect = true;
 				connectToServer.close();
 				input.close();
 			}
