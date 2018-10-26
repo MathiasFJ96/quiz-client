@@ -157,7 +157,7 @@ public class QuizGameClient {
 			endGameStatus(0,score);
 			}else if (player3Score >= 5) {
 				gameIsRunning = false;
-				endGameStatus(0,score);
+				endGameStatus(3,player3Score);
 			}
 			
 		
