@@ -175,11 +175,13 @@ public class QuizGameClient {
 			if(answer.equals("y")) {
 				toServer.writeInt(1);
 				System.out.println("Connected to Lobby");
-				System.out.print("Game starting over");
+				System.out.println("Game starting over");
+				System.out.println("Waiting for all 3 players to answer");
 				gameIsRunning = true;
 				score = 0;
 			}
 			if(answer.equals("n")) {
+				toServer.writeInt(0);
 				connect=false;
 				connectToServer.close();
 				input.close();
@@ -220,7 +222,7 @@ public class QuizGameClient {
 			gameIsRunning = true;
 		}
 		if(answer.equals("n")) {
-			connect=false;
+			toServer.writeInt(2);
 			connectToServer.close();
 			input.close();
 		}
