@@ -13,6 +13,7 @@ public class QuizGameClient {
 	private static Socket connectToServer;
 	private static DataOutputStream toServer;
 	private static DataInputStream fromServer;
+	private static int LeadingPlayersScore;
 	
 	private static Scanner input;
 	private static boolean connect;
@@ -67,6 +68,7 @@ public class QuizGameClient {
 			correctAnswer();
 			
 			leadingPlayer = fromServer.readInt();
+			LeadingPlayersScore = fromServer.readInt();
 			//status of the quiz (who is leading etc.)
 			status();
 			
@@ -118,16 +120,13 @@ public class QuizGameClient {
 	}
 	
 	public static void status () {
-		try {
 		
 		if (leadingPlayer < 3 ) {
-		System.out.println("Player" +leadingPlayer+ ": " + "is in the lead with " + fromServer.readInt() + " points");
+		System.out.println("Player" +leadingPlayer+ ": " + "is in the lead with " + LeadingPlayersScore + " points");
 		}else {
-		System.out.println("multiple players are leading with " + fromServer.readInt() + " points");
+		System.out.println("multiple players are leading with " + LeadingPlayersScore + " points");
 		}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} 
+		
 	}
 	
 	public static void winConditionMet(){
