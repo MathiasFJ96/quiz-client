@@ -39,7 +39,7 @@ public class QuizGameClient {
 	
 	try {
 			// Initialize socket and data streams
-		connectToServer = new Socket("192.168.43.119", 8000);
+		connectToServer = new Socket("192.168.43.119", 8200);
 		toServer = new DataOutputStream(connectToServer.getOutputStream());
 		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
@@ -110,6 +110,7 @@ public class QuizGameClient {
 		}
 		else {
 			QuestionDB.questions[questionNumber].CorrectAnswer();
+			toServer.writeInt(score);
 		}
 		} catch (IOException ex) {
 			ex.printStackTrace();
