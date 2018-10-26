@@ -144,7 +144,7 @@ public class QuizGameClient {
 			}
 			
 		
-			if (score >= 5 && player1Score == player2Score || score == player2Score || player1Score == player3Score || score == player3Score|| player2Score == player3Score || score == player3Score ) {
+			if ( (player1Score == player2Score && player1Score >= 5)|| (score == player2Score && score >= 5) || (player1Score == player3Score && player1Score <=5) || (score == player3Score && score >= 5)|| (player2Score == player3Score && player2Score>=5) || (score == player3Score && score>=5)) {
 			endGameStatus(4, 5);
 			}else if(player1Score >= 5 ) {
 			gameIsRunning = false;
