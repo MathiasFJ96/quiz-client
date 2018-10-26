@@ -194,6 +194,10 @@ public class QuizGameClient {
 				connect = true;
 				gameIsRunning = true;
 				score = 0;
+				if(fromServer.readInt() == 2) {
+					connect = false;
+					gameIsRunning = false;
+				}
 			}
 			if(answer.equals("n")) {
 				toServer.writeInt(2);
