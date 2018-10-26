@@ -195,6 +195,7 @@ public class QuizGameClient {
 				gameIsRunning = true;
 				score = 0;
 				if(fromServer.readInt() == 2) {
+					System.out.println("Server Closing Because some Players didn't wanna continue");
 					connect = false;
 					gameIsRunning = false;
 				}
