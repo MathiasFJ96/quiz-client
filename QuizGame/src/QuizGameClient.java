@@ -196,15 +196,15 @@ public class QuizGameClient {
 	public static void endGameStatus(int x,int score) {
 		if( x == 0 ) {
 			System.out.println("You Won with: " + score);
-			System.out.println("Do you want to play again?");
+			System.out.println("Do you want to play again? y/n");
 			playAgain(input.next().toLowerCase());
 		} else if (x ==4) {
 			System.out.println("Drawed with: " + score);
-			System.out.println("Do you want to play again?");
+			System.out.println("Do you want to play again? y/n");
 			playAgain(input.next().toLowerCase());
 		}else {
 			System.out.println("player " + x + " won with: " + score);
-			System.out.println("Do you want to play again?");
+			System.out.println("Do you want to play again? y/n ");
 			playAgain(input.next().toLowerCase());
 		}
 		
