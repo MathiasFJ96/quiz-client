@@ -34,7 +34,7 @@ public class QuizGameClient {
 	
 	try {
 			// Initialize socket and data streams
-		connectToServer = new Socket("192.168.43.119", 8200);
+		connectToServer = new Socket("192.168.43.119", 8000);
 		toServer = new DataOutputStream(connectToServer.getOutputStream());
 		fromServer = new DataInputStream(connectToServer.getInputStream());
 		
@@ -64,7 +64,7 @@ public class QuizGameClient {
 			
 			
 			qAnswer = input.next();
-			verifyInput();
+			verifyInput(qAnswer);
 				 			 
 			if(QuestionDB.questions[questionNumber].checkAns(verifyAnswer)) {
 				score++;
@@ -93,14 +93,20 @@ public class QuizGameClient {
 	}
 
 	} // Main thread
-	public static void verifyInput() {
-		if (qAnswer.equals("a") || qAnswer.equals("b") || qAnswer.equals("c") || qAnswer.equals("d")) {
-			verifyAnswer = qAnswer;
+	public static void verifyInput(String answer) {
+		if (answer.equals("a") || answer.equals("b") || answer.equals("c") || answer.equals("d")) {
+			verifyAnswer = answer;
 			
 		} else {
-			qAnswer = null;
 			System.out.println("Please answer with a,b,c or d");
-			qAnswer = input.next();
+			verifyAnswer = input.next();
 		}
+		
+		if(verifyAnswer.equals("a")|| verifyAnswer.equals("b") || verifyAnswer.equals("c") || verifyAnswer.equals("d")) {
+			
+     	} else {
+     		verifyInput(answer);
+     	}
+		
 	}
 } // Class bracket
