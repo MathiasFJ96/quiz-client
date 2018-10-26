@@ -144,10 +144,7 @@ public class QuizGameClient {
 			}
 			
 		
-			if(player1Score >= 5 && player1Score == player2Score && player1Score == score) {
-			
-			} else if (score >= 5 && player1Score == player2Score || score == player2Score || player1Score == player3Score || score == player3Score|| player2Score == player3Score || score == player3Score ) {
-			System.out.println("draw");
+			if (score >= 5 && player1Score == player2Score || score == player2Score || player1Score == player3Score || score == player3Score|| player2Score == player3Score || score == player3Score ) {
 			endGameStatus(4, 5);
 			}else if(player1Score >= 5 ) {
 			gameIsRunning = false;
