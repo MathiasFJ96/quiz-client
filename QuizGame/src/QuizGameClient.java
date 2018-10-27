@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class QuizGameClient {
-		// Variables for player score and question numbers
+		// Variables for player score, question management, socket and etc.
 	private static int score = 0;
 	private static int questionNumber;
 	private static int leadingPlayer;
@@ -52,7 +52,7 @@ public class QuizGameClient {
 			//toServer.flush();
 			if (playerNum == 0) {
 				playerNum = fromServer.readInt();
-			System.out.println("You are player"+ playerNum);
+			System.out.println("You are player "+ playerNum);
 			}
 			everoneWantToPlay = fromServer.readInt();
 			
@@ -195,7 +195,7 @@ public class QuizGameClient {
 				gameIsRunning = true;
 				score = 0;
 				if(fromServer.readInt() == 2) {
-					System.out.println("Server Closing Because some Players didn't wanna continue");
+					System.out.println("Server closing because some players do not want continue");
 					connect = false;
 					gameIsRunning = false;
 				}
