@@ -78,7 +78,7 @@ public class QuizGameClient {
 			verifyInput(qAnswer);
 				 		
 			//correct answer + score addition
-			correctAnswer();
+			verifyAnswer();
 			
 			leadingPlayer = fromServer.readInt();
 			LeadingPlayersScore = fromServer.readInt();
@@ -115,7 +115,7 @@ public class QuizGameClient {
 	}
 	
 	
-	public static void correctAnswer() {
+	public static void verifyAnswer() {
 		try {
 		if(QuestionDB.questions[questionNumber].checkAns(verifyAnswer)) {
 			score++;
