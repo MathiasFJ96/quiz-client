@@ -21,7 +21,7 @@ public class QuizGameClient {
 	private static String answer;
 	private static int playerNum;
 	
-	public static String verifyAnswer;
+	public static String verifyAns;
 	public static String qAnswer;
 	public static int player1Score, player2Score, player3Score, everoneWantToPlay;
 	
@@ -100,14 +100,14 @@ public class QuizGameClient {
 	} // Main thread
 	public static void verifyInput(String answer) {
 		if (answer.equals("a") || answer.equals("b") || answer.equals("c") || answer.equals("d")) {
-			verifyAnswer = answer;
+			verifyAns = answer;
 			
 		} else {
 			System.out.println("Please answer with a,b,c or d");
-			verifyAnswer = input.next();
+			verifyAns = input.next();
 		}
 		
-		if(verifyAnswer.equals("a")|| verifyAnswer.equals("b") || verifyAnswer.equals("c") || verifyAnswer.equals("d")) {
+		if(verifyAns.equals("a")|| verifyAns.equals("b") || verifyAns.equals("c") || verifyAns.equals("d")) {
 			
      	} else {
      		verifyInput(answer);
@@ -117,7 +117,7 @@ public class QuizGameClient {
 	
 	public static void verifyAnswer() {
 		try {
-		if(QuestionDB.questions[questionNumber].checkAns(verifyAnswer)) {
+		if(QuestionDB.questions[questionNumber].checkAns(verifyAns)) {
 			score++;
 			toServer.writeInt(score);
 			System.out.println("Correct, you now have " + score + " points");
